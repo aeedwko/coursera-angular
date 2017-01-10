@@ -10,7 +10,7 @@
     $scope.count = 0;
     $scope.message= "";
     $scope.updateMessage = function() {
-      if ($scope.input == "") {
+      if ($scope.count == 0) {
         $scope.message = "Please enter data first";
       } else if ($scope.count <= 3) {
         $scope.message = "Enjoy!";
@@ -27,6 +27,7 @@
           $scope.count -= 1;
         }
       }
+      return $scope.count;
     }
   }
 })();
