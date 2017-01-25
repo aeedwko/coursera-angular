@@ -27,7 +27,6 @@
           $scope.count -= 1;
         }
       }
-      return $scope.count;
     }
   }
 })();
