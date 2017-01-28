@@ -14,7 +14,7 @@
         onRemove: '&'
       },
       controller: FoundItemsDirectiveController,
-      controllerAs: 'items',
+      controllerAs: 'list',
       bindToController: true
     };
 
@@ -22,7 +22,7 @@
   }
 
   function FoundItemsDirectiveController() {
-    var items = this;
+    var list = this;
 
   }
   NarrowItDownController.$inject = ['MenuSearchService'];
@@ -49,6 +49,7 @@
   MenuSearchService.$inject = ['$http'];
   function MenuSearchService($http) {
     var service = this;
+    var foundItems = [];
 
     service.getMatchedMenuItems = function(searchTerm) {
 
@@ -57,7 +58,6 @@
         url: "https://davids-restaurant.herokuapp.com/menu_items.json"
       })
       .then(function (result) {
-        var foundItems = [];
         console.log(result.data.menu_items.length);
         for (var i = 0; i < result.data.menu_items.length; i++) {
           console.log("searchTerm :" + searchTerm);
@@ -72,7 +72,7 @@
     };
 
     service.removeItem = function(itemIndex) {
-      items.splice(itemIndex, 1);
+      foundItems.splice(itemIndex, 1);
     };
   }
 })();
