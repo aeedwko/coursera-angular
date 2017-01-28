@@ -1,6 +1,8 @@
-<h1>hi</h1>
+<div ng-if="list.isEmpty()">
+  Nothing found
+</div>
   <ul>
-    <li ng-repeat="item in list.directiveFound.found">
+    <li ng-repeat="item in list.directiveFound">
       {{ item.name }}, {{ item.short_name }}, {{ item.description }}
       <button ng-click="list.onRemove({index: $index});">Don't want this one!</button>
     </li>

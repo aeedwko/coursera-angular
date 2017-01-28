@@ -23,7 +23,12 @@
 
   function FoundItemsDirectiveController() {
     var list = this;
-
+    list.isEmpty = function() {
+      if (list.directiveFound != undefined && list.directiveFound.length === 0) {
+        return true;
+      }
+      return false;
+    };
   }
   NarrowItDownController.$inject = ['MenuSearchService'];
   function NarrowItDownController(MenuSearchService) {
@@ -32,7 +37,6 @@
       var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
 
       promise.then(function (response) {
-        console.log(response);
         search.found = response;
         //console.log(search.categories.menu_items);
       })
@@ -58,14 +62,17 @@
         url: "https://davids-restaurant.herokuapp.com/menu_items.json"
       })
       .then(function (result) {
-        console.log(result.data.menu_items.length);
+        foundItems = [];
+
+        if (searchTerm === "") {
+          return foundItems;
+        }
+
         for (var i = 0; i < result.data.menu_items.length; i++) {
-          console.log("searchTerm :" + searchTerm);
           if (result.data.menu_items[i].description.includes(searchTerm)) {
             foundItems.push(result.data.menu_items[i]);
           }
         }
-        console.log(foundItems);
         return foundItems;
       });
       return response;
